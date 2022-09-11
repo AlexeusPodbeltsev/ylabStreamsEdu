@@ -123,7 +123,6 @@ public class ComplexExamples {
         System.out.println(Arrays.toString(twoSum(arr, 10)));
 
 
-
         /*
         Task1
             Убрать дубликаты, отсортировать по идентификатору, сгруппировать по имени
@@ -173,5 +172,22 @@ public class ComplexExamples {
             }
         }
         return new int[]{};
+    }
+
+    public static boolean fuzzySearch(String query, String data) {
+        int nextFound = 0;
+        boolean match = false;
+
+        for (int i = 0; i < query.length(); i++) {
+            match = false;
+            for (; nextFound < data.length(); nextFound++) {
+                if (query.charAt(i) == data.charAt(nextFound)) {
+                    match = true;
+                    nextFound++;
+                    break;
+                }
+            }
+        }
+        return match;
     }
 }
