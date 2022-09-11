@@ -114,6 +114,13 @@ public class ComplexExamples {
                     System.out.println("Value: " + value);
                 });
 
+        System.out.println();
+        System.out.println("**************************************************");
+        System.out.println();
+        System.out.println("Task 2");
+        System.out.println();
+        int[] arr = new int[]{3, 4, 2, 7};
+        System.out.println(Arrays.toString(twoSum(arr, 10)));
 
 
 
@@ -154,4 +161,17 @@ public class ComplexExamples {
          */
     }
 
+    public static int[] twoSum(int[] arr, int sum) {
+        Set<Integer> nums = new HashSet<>();
+
+        for (int i = 0; i < arr.length; i++) {
+            int numToFind = sum - arr[i];
+            if (nums.contains(numToFind)) {
+                return new int[]{numToFind, arr[i]};
+            } else {
+                nums.add(arr[i]);
+            }
+        }
+        return new int[]{};
+    }
 }
