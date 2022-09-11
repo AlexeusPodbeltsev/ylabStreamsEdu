@@ -10,7 +10,6 @@ import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.mapping;
 import static java.util.stream.Collectors.toList;
 
-@Slf4j
 public class MapExamples {
     public static void main(String[] args) {
         Author kant = new Author();

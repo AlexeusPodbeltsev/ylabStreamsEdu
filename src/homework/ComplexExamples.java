@@ -8,6 +8,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.toList;
 
 public class ComplexExamples {
 
@@ -104,6 +105,17 @@ public class ComplexExamples {
         System.out.println("Duplicate filtered, grouped by name, sorted by name and id:");
         System.out.println();
 
+        Arrays.stream(RAW_DATA)
+                .distinct()
+                .sorted(Comparator.comparing(Person::getId))
+                .collect(groupingBy(Person::getName, Collectors.counting()))
+                .forEach((key, value) -> {
+                    System.out.println("Key: " + key);
+                    System.out.println("Value: " + value);
+                });
+
+
+
 
         /*
         Task1
@@ -141,7 +153,5 @@ public class ComplexExamples {
                     fuzzySearch("lw", "cartwheel"); // false
          */
     }
-
-
 
 }
