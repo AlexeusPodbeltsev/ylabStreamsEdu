@@ -52,4 +52,15 @@ class ComplexExamplesTest {
                 "expected: " + Arrays.toString(expected)
                         + "\nactual: " + Arrays.toString(actual));
     }
+
+    @Test
+    @DisplayName("Test twoSum Method with null input as an array, expected returning empty array")
+    void twoSumMethodWithNullAsInputTest() {
+        int[] nums = null;
+        int[] expected = new int[]{};
+        int[] actual = ComplexExamples.twoSum(nums, 10);
+        assertArrayEquals(expected, actual,
+                "expected: " + Arrays.toString(expected)
+                        + "\nactual: " + Arrays.toString(actual));
+    }
 }

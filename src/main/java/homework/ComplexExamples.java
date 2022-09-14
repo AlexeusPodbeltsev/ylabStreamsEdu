@@ -105,14 +105,16 @@ public class ComplexExamples {
         System.out.println("Duplicate filtered, grouped by name, sorted by name and id:");
         System.out.println();
 
-        Arrays.stream(RAW_DATA)
+        Map<String, Long> personMapGroupedByName = Arrays.stream(RAW_DATA)
+                .filter(Objects::nonNull)
                 .distinct()
                 .sorted(Comparator.comparing(Person::getId))
-                .collect(groupingBy(Person::getName, Collectors.counting()))
-                .forEach((key, value) -> {
-                    System.out.println("Key: " + key);
-                    System.out.println("Value: " + value);
-                });
+                .collect(groupingBy(Person::getName, Collectors.counting()));
+
+        personMapGroupedByName.forEach((name, count) -> {
+            System.out.printf("Key: %s\n", name);
+            System.out.printf("Value: %d\n", count);
+        });
 
         System.out.println();
         System.out.println("**************************************************");
@@ -162,7 +164,9 @@ public class ComplexExamples {
 
     public static int[] twoSum(int[] arr, int sum) {
         Set<Integer> nums = new HashSet<>();
-
+        if (arr == null) {
+            return new int[]{};
+        }
         for (int i = 0; i < arr.length; i++) {
             int numToFind = sum - arr[i];
             if (nums.contains(numToFind)) {
@@ -175,6 +179,10 @@ public class ComplexExamples {
     }
 
     public static boolean fuzzySearch(String query, String data) {
+        if (query == null || data == null) {
+            return false;
+        }
+
         int nextFound = 0;
         boolean match = false;
 
