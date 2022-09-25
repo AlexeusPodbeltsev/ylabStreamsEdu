@@ -8,6 +8,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.toList;
 
 public class ComplexExamples {
 
@@ -104,6 +105,25 @@ public class ComplexExamples {
         System.out.println("Duplicate filtered, grouped by name, sorted by name and id:");
         System.out.println();
 
+        Map<String, Long> personMapGroupedByName = Arrays.stream(RAW_DATA)
+                .filter(Objects::nonNull)
+                .distinct()
+                .sorted(Comparator.comparing(Person::getId))
+                .collect(groupingBy(Person::getName, Collectors.counting()));
+
+        personMapGroupedByName.forEach((name, count) -> {
+            System.out.printf("Key: %s\n", name);
+            System.out.printf("Value: %d\n", count);
+        });
+
+        System.out.println();
+        System.out.println("**************************************************");
+        System.out.println();
+        System.out.println("Task 2");
+        System.out.println();
+        int[] arr = new int[]{3, 4, 2, 7};
+        System.out.println(Arrays.toString(twoSum(arr, 10)));
+
 
         /*
         Task1
@@ -142,6 +162,40 @@ public class ComplexExamples {
          */
     }
 
+    public static int[] twoSum(int[] arr, int sum) {
+        Set<Integer> nums = new HashSet<>();
+        if (arr == null) {
+            return new int[]{};
+        }
+        for (int i = 0; i < arr.length; i++) {
+            int numToFind = sum - arr[i];
+            if (nums.contains(numToFind)) {
+                return new int[]{numToFind, arr[i]};
+            } else {
+                nums.add(arr[i]);
+            }
+        }
+        return new int[]{};
+    }
 
+    public static boolean fuzzySearch(String query, String data) {
+        if (query == null || data == null) {
+            return false;
+        }
 
+        int nextFound = 0;
+        boolean match = false;
+
+        for (int i = 0; i < query.length(); i++) {
+            match = false;
+            for (; nextFound < data.length(); nextFound++) {
+                if (query.charAt(i) == data.charAt(nextFound)) {
+                    match = true;
+                    nextFound++;
+                    break;
+                }
+            }
+        }
+        return match;
+    }
 }
